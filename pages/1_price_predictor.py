@@ -129,17 +129,32 @@ if st.button("🔍 Predict Price", use_container_width=True):
         'floor_category'
     ]
 
-    one_df = pd.DataFrame(data, columns=columns)
+   one_df = pd.DataFrame(data, columns=columns)
 
-    base_price = np.expm1(pipeline.predict(one_df))[0]
+    preprocessor = pipeline[:-1]
+    regressor = pipeline[-1]
 
-    low = base_price - 0.22
-    high = base_price + 0.22
+    X_transformed = preprocessor.transform(one_df)
+
+    tree_preds_log = np.array([
+        tree.predict(X_transformed) for tree in regressor.estimators_
+    ]).flatten()
+
+    tree_preds_price = np.expm1(tree_preds_log)
+
+    base_price = tree_preds_price.mean()
+    low = np.percentile(tree_preds_price, 5)
+    high = np.percentile(tree_preds_price, 95)
 
     st.success("#### Estimated Price")
 
     c1, c2, c3 = st.columns(3)
 
     c1.metric("Estimated Price", f"₹ {base_price:.2f} Cr")
-    c2.metric("Lower Range", f"₹ {low:.2f} Cr")
-    c3.metric("Upper Range", f"₹ {high:.2f} Cr")
+    c2.metric("Lower Range (5th %ile)", f"₹ {low:.2f} Cr")
+    c3.metric("Upper Range (95th %ile)", f"₹ {high:.2f} Cr")
+
+    st.caption(
+        "Range reflects the spread of predictions across the Random Forest's "
+        "individual trees, not a fixed margin."
+    )
