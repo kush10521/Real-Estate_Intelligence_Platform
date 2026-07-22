@@ -114,18 +114,19 @@ Features include:
 ## 🏡 Property Recommendation System
 
 Location Selection  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⬇️<br>
+⬇️  
 Radius-Based Apartment Search  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⬇️<br>
+⬇️  
 Apartment Selection  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⬇️<br>
+⬇️  
 Content-Based Recommendation Engine  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⬇️<br>
+⬇️  
 Weighted Cosine Similarity  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⬇️<br>
+⬇️  
 Top 5 Similar Apartment Recommendations  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⬇️<br>
+⬇️  
 Similarity Score + Direct Property Link
+
 ---
 # 🔄 Project Workflow
 
@@ -238,10 +239,10 @@ Finally dropped some columns like
 
 Encode categorical column, scaling features and log transformations and fitting the pipeline using **SVR** and **linear regression** algorithm via `baseline_model.ipynb`
 
-### 📈 Performance
 
 ![Baseline Model](screenshots/baseline_model.png)
 
+### 📈 Performance
 Using **k-fold cross validation** for baseline model
 
 - **R² score:** `0.8832604429`
